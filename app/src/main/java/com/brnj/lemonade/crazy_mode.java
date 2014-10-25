@@ -116,10 +116,10 @@ public class crazy_mode extends Activity {
     }
     public void endGame() {
         doEndGame = false;
-        Intent mainIntent = new Intent(this, MainActivity.class);
+        Intent showIntent = new Intent(this, show_score.class);
         String score = "" + currentScore;
-        mainIntent.putExtra(SCORE, score);
-        startActivity(mainIntent);
+        showIntent.putExtra(SCORE, score);
+        startActivity(showIntent);
     }
 
     public void start() {

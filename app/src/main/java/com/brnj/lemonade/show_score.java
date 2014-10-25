@@ -28,6 +28,8 @@ public class show_score extends Activity {
             updateTextView(intent.getStringExtra(timed_mode.SCORE));
         else if (intent.getStringExtra(arcade_mode.SCORE) != null)
             updateTextView(intent.getStringExtra(arcade_mode.SCORE));
+        else if (intent.getStringExtra(crazy_mode.SCORE) != null)
+            updateTextView(intent.getStringExtra(crazy_mode.SCORE));
     }
 
 
