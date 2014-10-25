@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void startGame(View view){
+    public void startTimedGame(View view){
         Intent timedIntent = new Intent(this, timed_mode.class);
         startActivity(timedIntent);
     }
