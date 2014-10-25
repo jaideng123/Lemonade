@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
     }
 
     public void startGame(View view){
-        Intent intent = new Intent(this, timed_mode.class);
+        Intent timedIntent = new Intent(this, timed_mode.class);
+        startActivity(timedIntent);
     }
 }
