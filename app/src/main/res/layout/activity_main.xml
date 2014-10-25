@@ -64,11 +64,11 @@
     <Button
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="@string/start_game"
+        android:text="@string/crazy_mode"
         android:textColor="#ffffff"
         android:id="@+id/button5"
         android:background="@drawable/round_button"
-        android:onClick=""
+        android:onClick="startCrazyGame"
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/button6" />
 
