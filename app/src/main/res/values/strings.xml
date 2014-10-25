@@ -12,5 +12,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_race_mode">race_mode</string>
     <string name="title_activity_arcade_mode">arcade_mode</string>
+    <string name="p2_race">2 Player Race</string>
+    <string name="p2_time">2 Player Time Trial</string>
+    <string name="title_activity_show_score">Score</string>
 
 </resources>

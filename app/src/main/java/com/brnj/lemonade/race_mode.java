@@ -15,7 +15,7 @@ import java.util.Random;
 
 
 public class race_mode extends Activity {
-    public final static String SCORE = "com.example.myfirstapp.race.SCORE";
+    public final static String SCORE = "com.example.Lemonade.race_mode.SCORE";
     int currentScore = 0;
     int currentTotal = 0;
     int stop = 30;
@@ -129,9 +129,9 @@ public class race_mode extends Activity {
     }
 
     public void endGame(){
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        String score = "" + currentScore;
-        mainIntent.putExtra(SCORE, score);
-        startActivity(mainIntent);
+        Intent scoreIntent = new Intent(this, show_score.class);
+        int score = currentScore;
+        scoreIntent.putExtra(SCORE, String.valueOf(score));
+        startActivity(scoreIntent);
     }
 }

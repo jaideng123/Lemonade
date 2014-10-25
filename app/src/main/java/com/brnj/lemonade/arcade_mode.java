@@ -129,10 +129,10 @@ public class arcade_mode extends Activity {
         textView.setText(toThis);
     }
     public void endGame(){
-        Intent mainIntent = new Intent(this, MainActivity.class);
+        Intent scoreIntent = new Intent(this, show_score.class);
         String score = "" + currentScore;
-        mainIntent.putExtra(SCORE, score);
-        startActivity(mainIntent);
+        scoreIntent.putExtra(SCORE, score);
+        startActivity(scoreIntent);
     }
 
 }
