@@ -8,7 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.app.ActionBar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Random;
 
 
 public class timed_mode extends Activity {
@@ -65,6 +68,21 @@ public class timed_mode extends Activity {
 
     public void addToScore(View view){
         if(gameStarted) {
+            Button button = (Button) findViewById(R.id.button);
+            Random r = new Random();
+            int buttonHeight;
+            int buttonWidth;
+            buttonHeight = button.getHeight();
+            buttonWidth = button.getWidth();
+            int xLeft = r.nextInt(480 - buttonHeight);
+            int yUp = r.nextInt(800 - buttonWidth);
+            int xRight = r.nextInt(480 + buttonHeight);
+            int yDown = r.nextInt(800 + buttonHeight);
+
+            button.setX(xLeft);
+            button.setY(yUp);
+            button.setX(xRight);
+            button.setY(yDown);
             ++currentScore;
             updateScoreTextView("Current Score:" + currentScore);
         }
