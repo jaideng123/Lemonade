@@ -41,11 +41,11 @@
     <Button
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="@string/start_game"
+        android:text="@string/arcade"
         android:textColor="#ffffff"
         android:id="@+id/button3"
         android:background="@drawable/round_button"
-        android:onClick=""
+        android:onClick="startArcadeGame"
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/textView" />
 

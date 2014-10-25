@@ -14,28 +14,28 @@ import android.widget.TextView;
 import java.util.Random;
 
 
-public class race_mode extends Activity {
-    public final static String SCORE = "com.example.myfirstapp.race.SCORE";
+public class arcade_mode extends Activity {
+    public final static String SCORE = "com.example.myfirstapp.arcade.SCORE";
     int currentScore = 0;
-    int currentTotal = 0;
-    int stop = 30;
-    boolean finished = false;
+    int goalScore = 25;
     Boolean gameStarted = false;
+    CountDownTimer counter;
+    int timeRemaining = 60;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         ActionBar actionBar = getActionBar();
         actionBar.hide();
-        setContentView(R.layout.activity_race_mode);
         startCountDown();
+        setContentView(R.layout.activity_arcade_mode);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_race_mode, menu);
+        getMenuInflater().inflate(R.menu.menu_arcade_mode, menu);
         return true;
     }
 
@@ -53,28 +53,8 @@ public class race_mode extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void startCountDown(){
-        new CountDownTimer(5000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                updateTextView("" + millisUntilFinished / 1000);
-
-            }
-            public void onFinish() {
-                updateTextView("Go!");
-                gameStarted = true;
-                startGame();
-            }
-        }.start();
-    }
     public void addToScore(View view){
         if(gameStarted) {
-            if (currentTotal == stop) {
-                finished = true;
-                endGame();
-            } else {
-                currentTotal++;
-                updateScoreTextView(currentTotal + "/" + stop);
-            }
             Button button = (Button) findViewById(R.id.button);
             Random r = new Random();
             int buttonHeight;
@@ -90,34 +70,55 @@ public class race_mode extends Activity {
             button.setY(yUp-15);
             button.setX(xRight-10);
             button.setY(yDown-10);
+
+            ++currentScore;
+            updateScoreTextView("Current Score:" + currentScore);
+            if(currentScore == goalScore){
+                goalScore = goalScore*2;
+                timeRemaining += 30;
+                counter.cancel();
+                counter = new CountDownTimer(timeRemaining*1000, 1000) {
+                    public void onTick(long millisUntilFinished) {
+                        updateTextView("" + millisUntilFinished / 1000);
+                        --timeRemaining;
+                    }
+                    public void onFinish() {
+                        endGame();
+                    }
+                };
+                counter.start();
+
+            }
         }
+    }
+    public void startCountDown(){
+        new CountDownTimer(5000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                updateTextView("" + millisUntilFinished / 1000);
+
+            }
+            public void onFinish() {
+                updateTextView("Go!");
+                gameStarted = true;
+                startGame();
+            }
+        }.start();
     }
     public void startGame(){
         updateTextView("");
         TextView textView = (TextView) findViewById(R.id.textView2);
         textView.setTextSize(30);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
-        updateTextView("" + currentScore);
-        updateScoreTextView(currentTotal + "/" + stop);
-        counter();
-    }
-    public void counter(){
-        new CountDownTimer(10000000, 1000) {
+        counter = new CountDownTimer(60000, 1000) {
             public void onTick(long millisUntilFinished) {
-                if(!finished) {
-                    currentScore++;
-                    updateTextView("" + currentScore + " Seconds");
-                }
-                else
-                   onFinish();
+                updateTextView("" + millisUntilFinished / 1000);
+                --timeRemaining;
             }
             public void onFinish() {
-                if(!finished)
-                    counter();
-                else
-                    cancel();
+                endGame();
             }
-        }.start();
+        };
+        counter.start();
     }
     public void updateTextView(String toThis) {
         TextView textView = (TextView) findViewById(R.id.textView2);
@@ -127,11 +128,11 @@ public class race_mode extends Activity {
         TextView textView = (TextView) findViewById(R.id.textView3);
         textView.setText(toThis);
     }
-
     public void endGame(){
         Intent mainIntent = new Intent(this, MainActivity.class);
         String score = "" + currentScore;
         mainIntent.putExtra(SCORE, score);
         startActivity(mainIntent);
     }
+
 }

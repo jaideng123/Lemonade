@@ -32,6 +32,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.brnj.lemonade.MainActivity" />
         </activity>
+        <activity
+            android:name="com.brnj.lemonade.arcade_mode"
+            android:label="@string/title_activity_arcade_mode" >
+        </activity>
     </application>
 
 </manifest>
