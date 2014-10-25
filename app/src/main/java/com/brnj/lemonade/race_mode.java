@@ -1,12 +1,12 @@
 package com.brnj.lemonade;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.app.ActionBar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,9 +14,12 @@ import android.widget.TextView;
 import java.util.Random;
 
 
-public class timed_mode extends Activity {
+public class race_mode extends Activity {
     public final static String SCORE = "com.example.myfirstapp.timed.SCORE";
     int currentScore = 0;
+    int currentTotal = 0;
+    int stop = 30;
+    boolean finished = false;
     Boolean gameStarted = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,7 @@ public class timed_mode extends Activity {
         Intent intent = getIntent();
         ActionBar actionBar = getActionBar();
         actionBar.hide();
-        setContentView(R.layout.activity_timed_mode);
+        setContentView(R.layout.activity_race_mode);
         startCountDown();
     }
 
@@ -32,7 +35,7 @@ public class timed_mode extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_timed_mode, menu);
+        getMenuInflater().inflate(R.menu.menu_race_mode, menu);
         return true;
     }
 
@@ -50,13 +53,12 @@ public class timed_mode extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-
     public void startCountDown(){
         new CountDownTimer(5000, 1000) {
-        public void onTick(long millisUntilFinished) {
+            public void onTick(long millisUntilFinished) {
                 updateTextView("" + millisUntilFinished / 1000);
 
-        }
+            }
             public void onFinish() {
                 updateTextView("Go!");
                 gameStarted = true;
@@ -64,9 +66,15 @@ public class timed_mode extends Activity {
             }
         }.start();
     }
-
     public void addToScore(View view){
         if(gameStarted) {
+            if (currentTotal == stop) {
+                finished = true;
+                endGame();
+            } else {
+                currentTotal++;
+                updateScoreTextView(currentTotal + "/" + stop);
+            }
             Button button = (Button) findViewById(R.id.button);
             Random r = new Random();
             int buttonHeight;
@@ -82,23 +90,32 @@ public class timed_mode extends Activity {
             button.setY(yUp-15);
             button.setX(xRight-10);
             button.setY(yDown-10);
-
-            ++currentScore;
-            updateScoreTextView("Current Score:" + currentScore);
         }
     }
-
     public void startGame(){
         updateTextView("");
         TextView textView = (TextView) findViewById(R.id.textView2);
         textView.setTextSize(30);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
-        new CountDownTimer(60000, 1000) {
+        updateTextView("" + currentScore);
+        updateScoreTextView(currentTotal + "/" + stop);
+        counter();
+    }
+    public void counter(){
+        new CountDownTimer(10000000, 1000) {
             public void onTick(long millisUntilFinished) {
-                updateTextView("" + millisUntilFinished / 1000);
+                if(!finished) {
+                    currentScore++;
+                    updateTextView("" + currentScore + " Seconds");
+                }
+                else
+                   onFinish();
             }
             public void onFinish() {
-                endGame();
+                if(!finished)
+                    counter();
+                else
+                    cancel();
             }
         }.start();
     }
@@ -110,6 +127,7 @@ public class timed_mode extends Activity {
         TextView textView = (TextView) findViewById(R.id.textView3);
         textView.setText(toThis);
     }
+
     public void endGame(){
         Intent mainIntent = new Intent(this, MainActivity.class);
         String score = "" + currentScore;

@@ -43,4 +43,8 @@ public class MainActivity extends Activity {
         Intent timedIntent = new Intent(this, timed_mode.class);
         startActivity(timedIntent);
     }
+    public void startRaceGame(View view){
+        Intent timedIntent = new Intent(this, race_mode.class);
+        startActivity(timedIntent);
+    }
 }

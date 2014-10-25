@@ -24,6 +24,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.brnj.lemonade.MainActivity" />
         </activity>
+        <activity
+            android:name="com.brnj.lemonade.race_mode"
+            android:label="@string/title_activity_race_mode"
+            android:parentActivityName="com.brnj.lemonade.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.brnj.lemonade.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
