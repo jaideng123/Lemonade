@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Lemonade Stand</string>
-    <string name="welcome_screen">Welcome to lemonade stand!</string>
+    <string name="app_name">Speed Button</string>
+    <string name="welcome_screen">Welcome to Speed Button!</string>
     <string name="start_game">Start New Game</string>
     <string name="action_settings">Settings</string>
 
