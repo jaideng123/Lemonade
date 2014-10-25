@@ -76,13 +76,14 @@ public class timed_mode extends Activity {
             buttonWidth = button.getWidth();
             int xLeft = r.nextInt(480 - buttonHeight);
             int yUp = r.nextInt(800 - buttonWidth);
-            int xRight = r.nextInt(480 + buttonHeight);
+            int xRight = r.nextInt(430 + buttonHeight);
             int yDown = r.nextInt(800 + buttonHeight);
 
-            button.setX(xLeft);
-            button.setY(yUp);
-            button.setX(xRight);
-            button.setY(yDown);
+            button.setX(xLeft-15);
+            button.setY(yUp-15);
+            button.setX(xRight-10);
+            button.setY(yDown-10);
+
             ++currentScore;
             updateScoreTextView("Current Score:" + currentScore);
         }
