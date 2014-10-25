@@ -1,26 +1,28 @@
 package com.brnj.lemonade;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.app.ActionBar;
 
 
-public class MainActivity extends Activity {
+public class timed_mode extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ActionBar actionBar = getActionBar();
+        actionBar.hide();
+        setContentView(R.layout.activity_timed_mode);
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_timed_mode, menu);
         return true;
     }
 
@@ -37,9 +39,5 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void startGame(View view){
-        Intent intent = new Intent(this, timed_mode.class);
     }
 }
