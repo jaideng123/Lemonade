@@ -68,7 +68,7 @@ public class race_mode extends Activity {
     }
     public void addToScore(View view){
         if(gameStarted) {
-            if (currentTotal == stop) {
+            if (currentTotal == stop-1) {
                 finished = true;
                 endGame();
             } else {
